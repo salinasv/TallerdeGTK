@@ -5,10 +5,10 @@ GtkEntry *nombre;
 GtkEntry *ap;
 GtkEntry *am;
 
-void 
+	void 
 on_miventanita_destroy (GtkObject *object, gpointer user_data)
 {
-        gtk_main_quit();
+	gtk_main_quit();
 }
 
 void on_button_pressed (GtkButton *button, gpointer user_data){
@@ -22,46 +22,48 @@ void on_button_pressed (GtkButton *button, gpointer user_data){
 }
 
 void on_clear_clicked(GtkButton *button, gpointer user_data){
-g_print("Clear!!\n");
+	g_print("Clear!!\n");
 }
 
 void on_lookup_clicked(GtkButton *button, gpointer user_data){
-g_print("Look Up!!\n");
+	g_print("Look Up!!\n");
 }
 
 void on_about_activate(GtkMenuItem *menu_item, gpointer about){
-gtk_widget_show(about);
+	gtk_widget_show(about);
 }
 
-int
+	int
 main (int argc, char *argv[])
 {
-        GtkBuilder              *builder;
-        GtkWidget               *miventanita;
-		GtkWidget *about;
-		GtkWidget *abouthelp;
+	GtkBuilder *builder;
+	GtkWidget *miventanita;
+	GtkWidget *about;
+	GtkWidget *abouthelp;
+	GtkWidget *clear;
+	GtkWidget *lookup;
+	gtk_init (&argc, &argv);
 
-		gtk_init (&argc, &argv);
-        
-        builder = gtk_builder_new ();
-        gtk_builder_add_from_file (builder, "miventanita.glade", NULL);
- 
-        miventanita = GTK_WIDGET (gtk_builder_get_object (builder, "miventanita"));
-		about = GTK_WIDGET (gtk_builder_get_object (builder, "about"));
-		abouthelp = GTK_WIDGET (gtk_builder_get_object (builder, "abouthelp"));
-		tunombre = GTK_LABEL (gtk_builder_get_object (builder,"tunombre"));
-		nombre=GTK_ENTRY(gtk_builder_get_object (builder,"nombre"));
-		ap=GTK_ENTRY(gtk_builder_get_object (builder,"ap"));
-		am=GTK_ENTRY(gtk_builder_get_object (builder,"am"));
-        gtk_builder_connect_signals (builder, NULL);  
+	builder = gtk_builder_new ();
+	gtk_builder_add_from_file (builder, "miventanita.glade", NULL);
 
-	   g_signal_connect(G_OBJECT(abouthelp), "activate", G_CALLBACK(on_about_activate), about);
-	
-        g_object_unref (G_OBJECT (builder));
-        gtk_widget_show (miventanita);       
-		//gtk_label_set_text(label,""); 
-		gtk_main ();
-        
-        return 0;
+	miventanita = GTK_WIDGET (gtk_builder_get_object (builder, "miventanita"));
+	about = GTK_WIDGET (gtk_builder_get_object (builder, "about"));
+	abouthelp = GTK_WIDGET (gtk_builder_get_object (builder, "abouthelp"));
+	clear  = GTK_WIDGET (gtk_builder_get_object (builder, "clear1"));
+	lookup = GTK_WIDGET (gtk_builder_get_object (builder, "lookup1"));
+	tunombre = GTK_LABEL (gtk_builder_get_object (builder,"tunombre"));
+	nombre=GTK_ENTRY(gtk_builder_get_object (builder,"nombre"));
+	ap=GTK_ENTRY(gtk_builder_get_object (builder,"ap"));
+	am=GTK_ENTRY(gtk_builder_get_object (builder,"am"));
+	gtk_builder_connect_signals (builder, NULL);  
+
+	g_signal_connect(G_OBJECT(abouthelp), "activate", G_CALLBACK(on_about_activate), about);
+
+	g_object_unref (G_OBJECT (builder));
+	gtk_widget_show (miventanita);       
+	//gtk_label_set_text(label,""); 
+	gtk_main ();
+
+	return 0;
 }
-
