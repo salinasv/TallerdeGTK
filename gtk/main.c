@@ -209,8 +209,6 @@ main (int argc, char *argv[])
 	gtk_box_pack_start(GTK_BOX(main_win),button, FALSE, FALSE, 0);
 
 	gtk_box_pack_start(GTK_BOX(main_win), usr_name->label, FALSE, FALSE, 0);
-	//gtk_container_add(GTK_CONTAINER(window1),button);
-	//gtk_container_add(GTK_CONTAINER(window1),label);
 
 	gtk_widget_show_all(window1);
 	gtk_main ();
