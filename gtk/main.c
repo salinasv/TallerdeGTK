@@ -148,7 +148,7 @@ main (int argc, char *argv[])
 
 	gtk_box_pack_start(GTK_BOX(main_win), hbox, FALSE, FALSE, 0);
 
-	button = gtk_button_new_with_label("button");
+	button = gtk_button_new_with_label("Click aquí");
 	g_signal_connect(G_OBJECT(button), "pressed", G_CALLBACK(on_button_pressed), usr_name);
 	gtk_box_pack_start(GTK_BOX(main_win),button, FALSE, FALSE, 0);
 
