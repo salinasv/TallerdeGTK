@@ -106,10 +106,10 @@ static GtkActionEntry entries[] =
 };
 static guint n_entries = G_N_ELEMENTS (entries);
 
-	void 
+void 
 on_window1_destroy (GtkObject *object, gpointer user_data)
 {
-	gtk_main_quit();
+	quit_action();
 }
 
 void on_button_pressed (GtkButton *button, gpointer userdata){
