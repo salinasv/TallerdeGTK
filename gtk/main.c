@@ -19,6 +19,22 @@ static void clear_character_action()
 	g_print("clear!\n");
 }
 
+static void about_action()
+{
+	GtkWidget *dialog;
+	GtkWidget *label;
+
+	dialog = gtk_dialog_new();
+	gtk_window_set_title(GTK_WINDOW(dialog), "About");
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 100, 50);
+	label = gtk_label_new("Esta ventana fue creada por Tambor.");
+
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), label);
+
+	gtk_widget_show_all(dialog);
+	g_print("About!\n");
+}
+
 static void quit_action()
 {
 	gtk_main_quit();
@@ -28,11 +44,16 @@ static GtkActionEntry entries[] =
 {
 	{ "FileMenuAction", NULL, "_File" },                  /* name, stock id, label */
 	{ "CharacterMenuAction", NULL, "_Character" },
+	{ "HelpMenuAction", NULL, "_Help"},
 
 	{ "NewAction", GTK_STOCK_NEW, "_New" },
 	{ "OpenAction", GTK_STOCK_OPEN, "_Open" },
 	{ "SaveAction", GTK_STOCK_SAVE, "_Save"},
 	{ "SaveAsAction", GTK_STOCK_SAVE, "Save _As"},
+
+	{ "AboutAction", GTK_STOCK_ABOUT, "_About", NULL,
+		"Muestra información del programa",
+		G_CALLBACK(about_action)},
 
 	{ "LookupAction", GTK_STOCK_FIND,                             /* name, stock id */
 		"_Lookup", "<control>L",                                    /* label, accelerator */
