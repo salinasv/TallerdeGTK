@@ -20,6 +20,10 @@ static GtkActionEntry entries[] =
 	{ "FileMenuAction", NULL, "_File" },                  /* name, stock id, label */
 	{ "CharacterMenuAction", NULL, "_Character" },
 
+	{ "NewAction", GTK_STOCK_NEW, "_New" },
+	{ "OpenAction", GTK_STOCK_OPEN, "_Open" },
+	{ "SaveAction", GTK_STOCK_SAVE, "_Save"},
+	{ "SaveAsAction", GTK_STOCK_SAVE, "Save _As"},
 
 	{ "LookupAction", GTK_STOCK_FIND,                             /* name, stock id */
 		"_Lookup", "<control>L",                                    /* label, accelerator */
