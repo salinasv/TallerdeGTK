@@ -1,4 +1,5 @@
 #include <gtk/gtk.h>
+#include <gst/gst.h>
 
 #include "player.h"
 
@@ -148,6 +149,7 @@ main (int argc, char *argv[])
 	Name *usr_name;
 	gint ui_id;
 
+	gst_init (&argc, &argv);
 	gtk_init (&argc, &argv);
 
 	app_window = g_new(Window, 1);
