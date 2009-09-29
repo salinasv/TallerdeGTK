@@ -1,5 +1,7 @@
 #include <gtk/gtk.h>
 
+#include "player.h"
+
 typedef struct name_
 {
 	GtkWidget *name;
@@ -58,7 +60,7 @@ static void new_action()
 			char *filename;
 			filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(filechooser));
 			printf("El archivo elegido es %s\n", filename);
-			g_free(filename);
+			player_new(app_window->window, filename);
 	}
 	gtk_widget_destroy(filechooser);
 }
