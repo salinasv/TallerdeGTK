@@ -1,6 +1,6 @@
-OBJECTS=main.c
+OBJECTS=main.o player.o
 
-CFLAGS=-Wall -ggdb `pkg-config --cflags --libs gtk+-2.0`
+CFLAGS=-Wall -ggdb `pkg-config --cflags --libs gtk+-2.0 gstreamer-app-0.10 gstreamer-plugins-base-0.10`
 
 
 
