@@ -9,6 +9,13 @@ typedef struct name_
 	gchar *fullname;
 }Name;
 
+typedef struct _window
+{
+	GtkWidget *window;
+}Window;
+
+Window *app_window;
+
 static void lookup_character_action()
 {
 	g_print("lookup\n");
@@ -35,6 +42,26 @@ static void about_action()
 	g_print("About!\n");
 }
 
+static void new_action()
+{
+	GtkWidget *filechooser;
+
+	filechooser = gtk_file_chooser_dialog_new("Busca archivo", 
+			GTK_WINDOW(app_window->window),
+			GTK_FILE_CHOOSER_ACTION_OPEN,
+			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+			GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+			NULL);
+
+	if (gtk_dialog_run(GTK_DIALOG(filechooser)) == GTK_RESPONSE_ACCEPT) {
+			char *filename;
+			filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(filechooser));
+			printf("El archivo elegido es %s\n", filename);
+			g_free(filename);
+	}
+	gtk_widget_destroy(filechooser);
+}
+
 static void quit_action()
 {
 	gtk_main_quit();
@@ -47,7 +74,9 @@ static GtkActionEntry entries[] =
 	{ "HelpMenuAction", NULL, "_Help"},
 
 	{ "NewAction", GTK_STOCK_NEW, "_New" },
-	{ "OpenAction", GTK_STOCK_OPEN, "_Open" },
+	{ "OpenAction", GTK_STOCK_OPEN, "_Open", NULL,
+   		"Abre archivo",
+		G_CALLBACK(new_action)	},
 	{ "SaveAction", GTK_STOCK_SAVE, "_Save"},
 	{ "SaveAsAction", GTK_STOCK_SAVE, "Save _As"},
 
@@ -114,7 +143,8 @@ main (int argc, char *argv[])
 
 	gtk_init (&argc, &argv);
 
-	window1= gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	app_window = g_new(Window, 1);
+	app_window->window = window1= gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	g_signal_connect (G_OBJECT (window1), "destroy",G_CALLBACK (on_window1_destroy), NULL);
 	gtk_window_set_title(GTK_WINDOW(window1), "Bla bla bla");
 
