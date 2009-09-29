@@ -32,6 +32,23 @@ void on_lookup_clicked(GtkButton *button, gpointer user_data){
 void on_about_activate(GtkMenuItem *menu_item, gpointer about){
 	gtk_widget_show(about);
 }
+void on_openn_activate(GtkMenuItem *menu_item, gpointer filechooser){
+	gtk_widget_show(filechooser);
+}
+
+void on_seleccionar_clicked(GtkButton *button, gpointer filechooser){
+	g_print("\n\nLa ruta del archivo seleccionado es: ");
+	g_print(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(filechooser)));
+	g_print("\n\n");
+	gtk_widget_hide(filechooser);
+}
+
+void on_filechooser_file_activated(gpointer filechooser){
+	g_print("\n\nLa ruta del archivo seleccionado es: ");
+	g_print(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(filechooser)));
+	g_print("\n\n");
+	gtk_widget_hide(filechooser);
+}
 
 	int
 main (int argc, char *argv[])
@@ -42,23 +59,32 @@ main (int argc, char *argv[])
 	GtkWidget *abouthelp;
 	GtkWidget *clear;
 	GtkWidget *lookup;
+	GtkWidget *openn;
+	GtkWidget *filechooser;
+	GtkButton *seleccionar;
 	gtk_init (&argc, &argv);
 
 	builder = gtk_builder_new ();
 	gtk_builder_add_from_file (builder, "miventanita.glade", NULL);
 
 	miventanita = GTK_WIDGET (gtk_builder_get_object (builder, "miventanita"));
+	filechooser = GTK_WIDGET (gtk_builder_get_object (builder, "filechooser"));
 	about = GTK_WIDGET (gtk_builder_get_object (builder, "about"));
 	abouthelp = GTK_WIDGET (gtk_builder_get_object (builder, "abouthelp"));
 	clear  = GTK_WIDGET (gtk_builder_get_object (builder, "clear1"));
 	lookup = GTK_WIDGET (gtk_builder_get_object (builder, "lookup1"));
 	tunombre = GTK_LABEL (gtk_builder_get_object (builder,"tunombre"));
+	openn = GTK_WIDGET (gtk_builder_get_object (builder,"openn"));
+	seleccionar = GTK_BUTTON (gtk_builder_get_object (builder, "seleccionar"));
+
 	nombre=GTK_ENTRY(gtk_builder_get_object (builder,"nombre"));
 	ap=GTK_ENTRY(gtk_builder_get_object (builder,"ap"));
 	am=GTK_ENTRY(gtk_builder_get_object (builder,"am"));
 	gtk_builder_connect_signals (builder, NULL);  
 
 	g_signal_connect(G_OBJECT(abouthelp), "activate", G_CALLBACK(on_about_activate), about);
+	g_signal_connect(G_OBJECT(openn), "activate", G_CALLBACK(on_openn_activate), filechooser);
+	g_signal_connect(G_OBJECT(seleccionar), "clicked", G_CALLBACK(on_seleccionar_clicked), filechooser);
 
 	g_object_unref (G_OBJECT (builder));
 	gtk_widget_show (miventanita);       
