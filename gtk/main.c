@@ -12,6 +12,7 @@ typedef struct name_
 typedef struct _window
 {
 	GtkWidget *window;
+	Name *usrname;
 }Window;
 
 Window *app_window;
@@ -64,6 +65,10 @@ static void new_action()
 
 static void quit_action()
 {
+	g_free(app_window->usrname->fullname);
+	g_free(app_window->usrname);
+	gtk_widget_destroy(app_window->window);
+	g_free(app_window);
 	gtk_main_quit();
 }
 
@@ -170,7 +175,7 @@ main (int argc, char *argv[])
 	main_win = gtk_vbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(menu_box),main_win, FALSE, FALSE, 0);
 
-	usr_name = g_new(Name, 1);
+	app_window->usrname = usr_name = g_new(Name, 1);
 	usr_name->label = gtk_label_new("Tu nombre es:");
 
 	hbox = gtk_hbox_new(FALSE, 0);
